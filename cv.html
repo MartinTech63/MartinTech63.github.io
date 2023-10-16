@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
     <title>Mon CV</title>
     <style>
         body {
@@ -11,7 +10,7 @@
             justify-content: center; /*centrer*/
         }
 
-        .container {
+        .bloc {
             max-width: 800px; /*taille max*/
             background-color: #ffffff; /*couleur arrière plan*/
             padding: 20px; /*marge*/
@@ -48,13 +47,13 @@
             font-weight: bold; /*gras*/
         }
 
-        .category { 
+        .separation { 
             border-top: 1px solid #ccc; /*ligne de séparation*/
             padding-top: 20px; /*espacement*/
             margin-top: 20px; /*marge*/
         }
 
-        .profile-picture {
+        .photo {
             max-width: 100px; /*taille de la photo*/
             margin: 20px 0; /*marge autour*/
         }
@@ -62,34 +61,32 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="bloc">
 
         <!-- photo de profil -->
-        <img src="https://www.martintech.fr/wp-content/uploads/2023/01/Logo_Final_3k1-1-1024x1024.png" alt="Photo de profil" class="profile-picture">
-
-       
+        <img src="https://www.martintech.fr/wp-content/uploads/2023/01/Logo_Final_3k1-1-1024x1024.png" alt="Photo de profil" class="photo">
 
         <h1>Martin Pontoizeau</h1>
         <h2>je suis pas développeur Web</h2>
 
-        <div class="category">
+        <div class="separation">
             <div class="section">
                 <h2>Expériences Professionnelles</h2>
 
                 <p><strong>Microsoft</strong> - Développeur</p>
-                <p>Date: Janvier 2020 - Présent</p>
-                <p>Réalisations: Création de l'outil "résolution des problèmes" pour Windows.</p>
+                <p>Date: Janvier 2020 - Février 2020</p>
+                <p>Réalisation: Création de l'outil "résolution des problèmes" pour Windows.</p>
                 
                 <p><strong>Etat / Renater</strong> - Assistant Développeur Web</p>
                 <p>Date: Juin 2018 - Décembre 2019</p>
-                <p>Réalisations: Site web de la CVEC.</p>
+                <p>Réalisation: Site web de la CVEC.</p>
             </div>
         </div>
 
-        <div class="category">
+        <div class="separation">
             <div class="section">
                 <h2>Formation</h2>
-                <p><strong>OpenIT</strong> - BTS SIO</p>
+                <p><strong>Open IT</strong> - BTS SIO</p>
                 <p>Date: 2023 - 2025</p>
 
                 <p><strong>Lycée Pierre Joël Bonté</strong> - Bac STI2D</p>
@@ -97,7 +94,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="separation">
             <div class="section">
                 <h2>Compétences</h2>
                 <ul>
@@ -107,6 +104,7 @@
                 </ul>
             </div>
         </div>
+        
     </div>
 </body>
 </html>
