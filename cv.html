@@ -5,59 +5,53 @@
     <title>Mon CV</title>
     <style>
         body {
-            font-family: "Arial", sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            font-family: "Arial", sans-serif; /*police*/
+            background-color: #f4f4f4; /*couleur arrière plan*/
+            display: flex; /*responsive*/
+            justify-content: center; /*centrer*/
         }
 
         .container {
-            max-width: 800px;
-            background-color: #ffffff;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            border-radius: 5px;
+            max-width: 800px; /*taille max*/
+            background-color: #ffffff; /*couleur arrière plan*/
+            padding: 20px; /*marge*/
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /*ombre bordure*/
+            border-radius: 5px; /*rayon*/
         }
 
         h1 {
-            color: #333;
-            font-size: 32px;
-            margin: 0;
+            color: #333; /*titre couleur*/
+            font-size: 32px; /*taille*/
+            margin: 0; /*espacement ligne*/
         }
 
         h2 {
-            color: #444;
-            font-size: 24px;
-            margin: 0;
+            color: #444; /*soustitre couleur*/
+            font-size: 24px; /*taille*/
+            margin: 0; /*espacement ligne*/
         }
 
-        .section {
-            margin-bottom: 20px;
+        .section h2 { /*balise sous titre*/
+            color: #0078d4; /*couleur*/
         }
 
-        .section h2 {
-            color: #0078d4;
+        .section p { /*balise paragraphe*/
+            line-height: 1.6; /*espacement ligne*/
         }
 
-        .section p {
-            line-height: 1.6;
+        ul { /*liste*/
+            list-style: disc; /*point*/
+            padding-left: 20px; /*marge a gauche*/
         }
 
-        ul {
-            list-style: disc;
-            padding-left: 20px;
+        strong { 
+            font-weight: bold; /*gras*/
         }
 
-        strong {
-            font-weight: bold;
-        }
-
-        .category {
-            border-top: 1px solid #ccc;
-            padding-top: 20px;
-            margin-top: 20px;
+        .category { 
+            border-top: 1px solid #ccc; /*ligne de séparation*/
+            padding-top: 20px; /*espacement*/
+            margin-top: 20px; /*marge*/
         }
     </style>
 </head>
