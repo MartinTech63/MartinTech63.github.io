@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Fonction pour installer Apache2
+installer_apache() {
+    sudo apt update
+    sudo apt install apache2
+    echo "Apache2 installé."
+}
+
 # Fonction pour activer un service
 activer_service() {
     sudo systemctl start $1
@@ -72,41 +79,44 @@ changer_page_web() {
 while true; do
     clear  # Efface l'écran avant d'afficher le menu
 
-    echo -e "\e[94m
-    ░        ░  ░░░░  ░░      ░░  ░░░░░░░       ░░░      ░░░      ░░  ░░░░  ░
-    ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒
-    ▓      ▓▓▓▓  ▓▓  ▓▓  ▓▓▓▓  ▓  ▓▓▓▓▓▓▓       ▓▓  ▓▓▓▓  ▓▓      ▓▓        ▓
-    █  █████████    ███        █  ███████  ████  █        ███████  █  ████  █
-    █        ████  ████  ████  █        █       ██  ████  ██      ██  ████  █
-                                                                            
-    \e[0m
-    1. Activer SSH
-    2. Désactiver SSH
-    3. Activer Apache
-    4. Désactiver Apache
-    5. Ajouter une clé d'authentification SSH à partir d'un fichier
-    6. Activer l'authentification par mot de passe SSH
-    7. Désactiver l'authentification par mot de passe SSH
-    8. Vérifier l'état d'un service
-    9. Changer la page web par défaut d'Apache à partir d'un fichier
-    10. Quitter
 
-    "
+
+echo -e "\e[94m
+    ░        ░  ░░░░  ░░      ░░  ░░░░░░░░       ░░░      ░░░      ░░  ░░░░  ░
+    ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒
+    ▓      ▓▓▓▓  ▓▓  ▓▓  ▓▓▓▓  ▓  ▓▓▓▓▓▓▓▓       ▓▓  ▓▓▓▓  ▓▓      ▓▓        ▓
+    █  █████████    ███        █  ████████  ████  █        ███████  █  ████  █
+    █        ████  ████  ████  █        ██       ██  ████  ██      ██  ████  █                                                           
+\e[0m"
+echo -e "   \n      Made by Martin Tech | https://martintech.fr/ | 2023\n"
+
+echo -e "    1. Installer Apache2
+    2. Activer SSH
+    3. Désactiver SSH
+    4. Activer Apache
+    5. Désactiver Apache
+    6. Ajouter une clé d'authentification SSH à partir d'un fichier
+    7. Activer l'authentification par mot de passe SSH
+    8. Désactiver l'authentification par mot de passe SSH
+    9. Vérifier l'état d'un service
+    10. Changer la page web par défaut d'Apache à partir d'un fichier
+    11. Quitter\n"
 
     read -p "Choisissez une option : " choix
 
     case $choix in
-        1) activer_service ssh;;
-        2) desactiver_service ssh;;
-        3) activer_apache;;
-        4) desactiver_apache;;
-        5) ajouter_cle_ssh;;
-        6) activer_auth_ssh;;
-        7) desactiver_auth_ssh;;
-        8) read -p "Entrez le nom du service : " service
+        1) installer_apache;;
+        2) activer_service ssh;;
+        3) desactiver_service ssh;;
+        4) activer_apache;;
+        5) desactiver_apache;;
+        6) ajouter_cle_ssh;;
+        7) activer_auth_ssh;;
+        8) desactiver_auth_ssh;;
+        9) read -p "Entrez le nom du service : " service
            verifier_service $service;;
-        9) changer_page_web;;
-        10) break;;
+        10) changer_page_web;;
+        11) break;;
         *) echo "Option invalide";;
     esac
     read -p "Appuyez sur Entrée pour continuer..."
