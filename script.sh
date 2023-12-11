@@ -81,14 +81,16 @@ while true; do
 
 
 
-echo -e "\e[94m
+echo -e "\e[38;2;255;165;0m
     ░        ░  ░░░░  ░░      ░░  ░░░░░░░░       ░░░      ░░░      ░░  ░░░░  ░
     ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒
     ▓      ▓▓▓▓  ▓▓  ▓▓  ▓▓▓▓  ▓  ▓▓▓▓▓▓▓▓       ▓▓  ▓▓▓▓  ▓▓      ▓▓        ▓
     █  █████████    ███        █  ████████  ████  █        ███████  █  ████  █
     █        ████  ████  ████  █        ██       ██  ████  ██      ██  ████  █                                                           
 \e[0m"
-echo -e "   \n      Made by Martin Tech | https://martintech.fr/ | 2023\n"
+echo -e "   \n              Made by Martin Tech | https://martintech.fr/ | 2023\n"
+
+
 
 echo -e "    1. Installer Apache2
     2. Activer SSH
