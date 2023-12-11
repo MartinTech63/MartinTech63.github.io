@@ -36,14 +36,28 @@ desactiver_apache() {
 
 # Fonction pour activer l'authentification par mot de passe SSH
 activer_auth_ssh() {
+    # Modification dans le fichier /etc/ssh/sshd_config
     sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+    
+    # Modification dans le fichier /etc/ssh/sshd_config.d/50-cloud-init.conf s'il existe
+    if [ -f "/etc/ssh/sshd_config.d/50-cloud-init.conf" ]; then
+        sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+    fi
+    
     sudo systemctl restart ssh
     echo "Authentification par mot de passe SSH activée."
 }
 
 # Fonction pour désactiver l'authentification par mot de passe SSH
 desactiver_auth_ssh() {
+    # Modification dans le fichier /etc/ssh/sshd_config
     sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+    
+    # Modification dans le fichier /etc/ssh/sshd_config.d/50-cloud-init.conf s'il existe
+    if [ -f "/etc/ssh/sshd_config.d/50-cloud-init.conf" ]; then
+        sudo sed -i 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config.d/50-cloud-init.conf
+    fi
+    
     sudo systemctl restart ssh
     echo "Authentification par mot de passe SSH désactivée."
 }
@@ -57,8 +71,10 @@ verifier_service() {
 ajouter_cle_ssh() {
     read -p "Entrez le chemin du fichier de clé SSH : " chemin_cle_ssh
     if [ -f "$chemin_cle_ssh" ]; then
-        cat "$chemin_cle_ssh" >> ~/.ssh/authorized_keys
-        echo "Clé SSH ajoutée."
+        cat "$chemin_cle_ssh" >> "$HOME/.ssh/authorized_keys"
+        echo "Contenu du fichier ajouté à authorized_keys."
+        sudo systemctl restart ssh
+        echo "Service SSH redémarré."
     else
         echo "Fichier introuvable."
     fi
@@ -81,15 +97,17 @@ while true; do
 
 
 
-echo -e "\e[38;2;255;165;0m
-    ░        ░  ░░░░  ░░      ░░  ░░░░░░░░       ░░░      ░░░      ░░  ░░░░  ░
-    ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒▒  ▒▒▒▒  ▒  ▒▒▒▒  ▒  ▒▒▒▒▒▒▒  ▒▒▒▒  ▒
-    ▓      ▓▓▓▓  ▓▓  ▓▓  ▓▓▓▓  ▓  ▓▓▓▓▓▓▓▓       ▓▓  ▓▓▓▓  ▓▓      ▓▓        ▓
-    █  █████████    ███        █  ████████  ████  █        ███████  █  ████  █
-    █        ████  ████  ████  █        ██       ██  ████  ██      ██  ████  █                                                           
+echo -e "\e[33m
+╔════════════════════════════════════════════════════════════════════════════╗
+║    ███████╗██╗   ██╗ █████╗ ██╗         ██████╗  █████╗ ███████╗██╗  ██╗   ║
+║    ██╔════╝██║   ██║██╔══██╗██║         ██╔══██╗██╔══██╗██╔════╝██║  ██║   ║
+║    █████╗  ██║   ██║███████║██║         ██████╔╝███████║███████╗███████║   ║
+║    ██╔══╝  ╚██╗ ██╔╝██╔══██║██║         ██╔══██╗██╔══██║╚════██║██╔══██║   ║
+║    ███████╗ ╚████╔╝ ██║  ██║███████╗    ██████╔╝██║  ██║███████║██║  ██║   ║
+║    ╚══════╝  ╚═══╝  ╚═╝  ╚═╝╚══════╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝   ║
+╚════════════════════════════════════════════════════════════════════════════╝
 \e[0m"
 echo -e "   \n              Made by Martin Tech | https://martintech.fr/ | 2023\n"
-
 
 
 echo -e "    1. Installer Apache2
