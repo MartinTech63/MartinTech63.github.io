@@ -127,10 +127,10 @@ uninstall_docker_compose() {
 # Menu principal
 echo "Choisissez une option :"
 echo "1. Installer Docker"
-echo "2. Installer Portainer"
+echo "2. Installer Portainer (http 9000)"
 echo "3. Installer Docker Compose"
-echo "4. Installer GitLab avec Docker Compose"
-echo "5. Installer GLPI avec Docker Compose"
+echo "4. Installer GitLab avec Docker Compose (https 443)"
+echo "5. Installer GLPI avec Docker Compose (http 8080)"
 echo "6. Mettre à jour Docker"
 echo "7. Mettre à jour Portainer"
 echo "8. Mettre à jour Docker Compose"
