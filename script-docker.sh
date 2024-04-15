@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Vérifier et installer sudo si nécessaire
+check_install_sudo() {
+    if ! command -v sudo &> /dev/null; then
+        echo "sudo n'est pas installé. Installation de sudo..."
+        apt-get update
+        apt-get install -y sudo
+        echo "sudo a été installé avec succès."
+    fi
+}
+
 # Fonction pour installer Docker
 install_docker() {
     sudo apt update
@@ -102,16 +112,16 @@ echo "11. Quitter"
 read -p "Entrez votre choix : " choix
 
 case $choix in
-    1) install_docker ;;
-    2) install_portainer ;;
-    3) install_docker_compose ;;
-    4) install_gitlab ;;
-    5) update_docker ;;
-    6) update_portainer ;;
-    7) update_docker_compose ;;
-    8) uninstall_docker ;;
-    9) uninstall_portainer ;;
-    10) uninstall_docker_compose ;;
+    1) check_install_sudo && install_docker ;;
+    2) check_install_sudo && install_portainer ;;
+    3) check_install_sudo && install_docker_compose ;;
+    4) check_install_sudo && install_gitlab ;;
+    5) check_install_sudo && update_docker ;;
+    6) check_install_sudo && update_portainer ;;
+    7) check_install_sudo && update_docker_compose ;;
+    8) check_install_sudo && uninstall_docker ;;
+    9) check_install_sudo && uninstall_portainer ;;
+    10) check_install_sudo && uninstall_docker_compose ;;
     11) echo "Au revoir!"; exit ;;
     *) echo "Choix non valide";;
 esac
