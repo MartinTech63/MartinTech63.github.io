@@ -34,7 +34,7 @@ install_docker_compose() {
 install_gitlab() {
     echo "Avant de continuer, veuillez modifier le fichier docker-compose-gitlab.yml selon vos besoins."
     read -p "Appuyez sur Entrée pour continuer après les modifications."
-    $EDITOR docker-compose-gitlab.yml
+    nano docker-compose-gitlab.yml
     docker-compose -f docker-compose-gitlab.yml up -d
 }
 
@@ -42,7 +42,7 @@ install_gitlab() {
 install_glpi() {
     echo "Avant de continuer, veuillez modifier le fichier docker-compose-glpi.yml selon vos besoins."
     read -p "Appuyez sur Entrée pour continuer après les modifications."
-    $EDITOR docker-compose-glpi.yml
+    nano docker-compose-glpi.yml
     docker-compose -f docker-compose-glpi.yml up -d
 }
 
