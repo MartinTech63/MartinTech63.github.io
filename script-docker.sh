@@ -32,58 +32,17 @@ install_docker_compose() {
 
 # Fonction pour installer GitLab en Docker Compose
 install_gitlab() {
-    mkdir -p /srv/gitlab/{config,logs,data}
-    cat <<EOF > docker-compose-gitlab.yml
-version: "3.7"
-services:
-  gitlab:
-    image: gitlab/gitlab-ce:latest
-    restart: always
-    hostname: gitlab.martintech.fr
-    environment:
-      GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://gitlab.martintech.fr'
-    ports:
-      - 80:80
-      - 443:443
-      - 222:22
-    volumes:
-      - /srv/gitlab/config:/etc/gitlab
-      - /srv/gitlab/logs:/var/log/gitlab
-      - /srv/gitlab/data:/var/opt/gitlab
-networks: {}
-EOF
+    echo "Avant de continuer, veuillez modifier le fichier docker-compose-gitlab.yml selon vos besoins."
+    read -p "Appuyez sur Entrée pour continuer après les modifications."
+    $EDITOR docker-compose-gitlab.yml
     docker-compose -f docker-compose-gitlab.yml up -d
 }
 
 # Fonction pour installer GLPI avec Docker Compose
 install_glpi() {
-    cat <<EOF > docker-compose-glpi.yml
-version: "3"
-services:
-  glpi:
-    image: diouxx/glpi:latest
-    container_name: glpi
-    restart: always
-    ports:
-      - 8080:80 # Map port 8080 on host to port 80 on container
-    environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_DATABASE=glpidb
-      - MYSQL_USER=glpiuser
-      - MYSQL_PASSWORD=glpipassword
-    depends_on:
-      - mysql
-  mysql:
-    image: mysql:5.7
-    container_name: mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: glpidb
-      MYSQL_USER: glpiuser
-      MYSQL_PASSWORD: glpipassword
-EOF
+    echo "Avant de continuer, veuillez modifier le fichier docker-compose-glpi.yml selon vos besoins."
+    read -p "Appuyez sur Entrée pour continuer après les modifications."
+    $EDITOR docker-compose-glpi.yml
     docker-compose -f docker-compose-glpi.yml up -d
 }
 
