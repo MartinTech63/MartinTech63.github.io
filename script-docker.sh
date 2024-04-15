@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Vérifier et installer sudo si nécessaire
-check_install_sudo() {
-    if ! command -v sudo &> /dev/null; then
-        echo "sudo n'est pas installé. Ce script nécessite sudo pour certaines opérations."
+# Vérifier si l'utilisateur a les privilèges administratifs
+check_admin_privileges() {
+    if [ "$(id -u)" != "0" ]; then
+        echo "Ce script nécessite des privilèges administratifs pour fonctionner."
         exit 1
     fi
 }
@@ -109,15 +109,17 @@ echo "11. Quitter"
 
 read -p "Entrez votre choix : " choix
 
+check_admin_privileges
+
 case $choix in
-    1) check_install_sudo && install_docker ;;
+    1) install_docker ;;
     2) install_portainer ;;
     3) install_docker_compose ;;
     4) install_gitlab ;;
-    5) check_install_sudo && update_docker ;;
+    5) update_docker ;;
     6) update_portainer ;;
     7) update_docker_compose ;;
-    8) check_install_sudo && uninstall_docker ;;
+    8) uninstall_docker ;;
     9) uninstall_portainer ;;
     10) uninstall_docker_compose ;;
     11) echo "Au revoir!"; exit ;;
