@@ -56,6 +56,37 @@ EOF
     docker-compose -f docker-compose-gitlab.yml up -d
 }
 
+# Fonction pour installer GLPI avec Docker Compose
+install_glpi() {
+    cat <<EOF > docker-compose-glpi.yml
+version: "3"
+services:
+  glpi:
+    image: diouxx/glpi:latest
+    container_name: glpi
+    restart: always
+    ports:
+      - 8080:80 # Map port 8080 on host to port 80 on container
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_DATABASE=glpidb
+      - MYSQL_USER=glpiuser
+      - MYSQL_PASSWORD=glpipassword
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: glpidb
+      MYSQL_USER: glpiuser
+      MYSQL_PASSWORD: glpipassword
+EOF
+    docker-compose -f docker-compose-glpi.yml up -d
+}
+
 # Fonction pour mettre à jour Docker
 update_docker() {
     apt update
@@ -99,13 +130,14 @@ echo "1. Installer Docker"
 echo "2. Installer Portainer"
 echo "3. Installer Docker Compose"
 echo "4. Installer GitLab avec Docker Compose"
-echo "5. Mettre à jour Docker"
-echo "6. Mettre à jour Portainer"
-echo "7. Mettre à jour Docker Compose"
-echo "8. Désinstaller Docker"
-echo "9. Désinstaller Portainer"
-echo "10. Désinstaller Docker Compose"
-echo "11. Quitter"
+echo "5. Installer GLPI avec Docker Compose"
+echo "6. Mettre à jour Docker"
+echo "7. Mettre à jour Portainer"
+echo "8. Mettre à jour Docker Compose"
+echo "9. Désinstaller Docker"
+echo "10. Désinstaller Portainer"
+echo "11. Désinstaller Docker Compose"
+echo "12. Quitter"
 
 read -p "Entrez votre choix : " choix
 
@@ -116,12 +148,13 @@ case $choix in
     2) install_portainer ;;
     3) install_docker_compose ;;
     4) install_gitlab ;;
-    5) update_docker ;;
-    6) update_portainer ;;
-    7) update_docker_compose ;;
-    8) uninstall_docker ;;
-    9) uninstall_portainer ;;
-    10) uninstall_docker_compose ;;
-    11) echo "Au revoir!"; exit ;;
+    5) install_glpi ;;
+    6) update_docker ;;
+    7) update_portainer ;;
+    8) update_docker_compose ;;
+    9) uninstall_docker ;;
+    10) uninstall_portainer ;;
+    11) uninstall_docker_compose ;;
+    12) echo "Au revoir!"; exit ;;
     *) echo "Choix non valide";;
 esac
