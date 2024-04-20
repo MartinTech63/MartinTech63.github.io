@@ -29,6 +29,9 @@
             var decodedText = decodeURIComponent(hash); // Décoder l'URL si nécessaire
             var contentDiv = document.getElementById('content'); // Trouve la div où afficher le texte
             contentDiv.innerText = decodedText; // Met le texte dans la div
+
+            // Met à jour aussi le titre de la page
+            document.title = decodedText || "Page Web d'exemple"; // Si le texte est vide, utilise un titre par défaut
         }
 
         // Appeler la fonction lors du chargement de la page et à chaque fois que l'URL change
