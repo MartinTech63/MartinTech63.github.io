@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Web d'exemple</title>
+    <style>
+        /* Styles CSS facultatifs pour la mise en forme */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+            padding-top: 100px;
+        }
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="content"></h1>
+    
+    <script>
+        // Fonction pour mettre à jour le texte en fonction du fragment de l'URL
+        function updateText() {
+            var hash = window.location.hash.substr(1); // Récupère le texte après le #
+            var decodedText = decodeURIComponent(hash); // Décoder l'URL si nécessaire
+            var contentDiv = document.getElementById('content'); // Trouve la div où afficher le texte
+            contentDiv.innerText = decodedText; // Met le texte dans la div
+        }
+
+        // Appeler la fonction lors du chargement de la page et à chaque fois que l'URL change
+        window.addEventListener('DOMContentLoaded', updateText);
+        window.addEventListener('hashchange', updateText);
+    </script>
+</body>
+</html>
