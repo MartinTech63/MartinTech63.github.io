@@ -2,6 +2,7 @@
 
 # Vérifier et installer sudo si nécessaire
 check_and_install_sudo() {
+    echo "Vérification de l'installation de sudo..."
     if ! command -v sudo &> /dev/null; then
         echo "sudo n'est pas installé. Installation de sudo..."
         apt update
@@ -14,6 +15,9 @@ check_and_install_sudo() {
 
 # Appeler la fonction de vérification de sudo
 check_and_install_sudo
+
+# Pause de 2 secondes pour lire le message
+sleep 2
 
 # Fonction pour afficher le menu principal
 show_main_menu() {
