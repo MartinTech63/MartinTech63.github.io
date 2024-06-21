@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# Vérifier et installer sudo si nécessaire
+check_and_install_sudo() {
+    if ! command -v sudo &> /dev/null; then
+        echo "sudo n'est pas installé. Installation de sudo..."
+        apt update
+        apt install -y sudo
+        echo "sudo a été installé."
+    else
+        echo "sudo est déjà installé."
+    fi
+}
+
+# Appeler la fonction de vérification de sudo
+check_and_install_sudo
+
 # Fonction pour afficher le menu principal
 show_main_menu() {
     clear
