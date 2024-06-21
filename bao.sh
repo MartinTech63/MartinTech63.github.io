@@ -2,6 +2,7 @@
 
 # Vérifier et installer sudo si nécessaire
 check_and_install_sudo() {
+    clear
     echo "Vérification de l'installation de sudo..."
     if ! command -v sudo &> /dev/null; then
         echo "sudo n'est pas installé. Installation de sudo..."
