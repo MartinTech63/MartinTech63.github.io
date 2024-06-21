@@ -2,6 +2,7 @@
 
 # Fonction pour afficher le menu principal
 show_main_menu() {
+    clear
     echo "===================="
     echo "  Boîte à Outils"
     echo "===================="
@@ -26,6 +27,7 @@ show_main_menu() {
 
 # Fonction pour afficher le menu VM
 show_vm_menu() {
+    clear
     echo "===================="
     echo "       VM"
     echo "===================="
@@ -46,6 +48,7 @@ show_vm_menu() {
 
 # Fonction pour afficher le menu LXC
 show_lxc_menu() {
+    clear
     echo "===================="
     echo "       LXC"
     echo "===================="
@@ -66,6 +69,7 @@ show_lxc_menu() {
 
 # Fonction pour afficher le menu Debian
 show_debian_menu() {
+    clear
     echo "===================="
     echo "     Debian"
     echo "===================="
@@ -84,6 +88,7 @@ show_debian_menu() {
 
 # Fonction pour afficher le menu Ubuntu
 show_ubuntu_menu() {
+    clear
     echo "===================="
     echo "     Ubuntu"
     echo "===================="
@@ -102,6 +107,7 @@ show_ubuntu_menu() {
 
 # Fonction pour afficher le menu Docker
 show_docker_menu() {
+    clear
     echo "===================="
     echo "     Docker"
     echo "===================="
