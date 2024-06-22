@@ -120,7 +120,7 @@ show_debian_menu() {
     echo "===================="
     read -p "Choisissez une option [1-3]: " debian_choice
     case $debian_choice in
-        1) sudo apt update && sudo apt upgrade ;;
+        1) sudo apt update && sudo apt upgrade -y ;;
         2) read -p "Entrez le nom du paquet à installer: " package_name; sudo apt install -y $package_name ;;
         3) show_main_menu ;;
         *) echo "Option invalide"; show_debian_menu ;;
@@ -139,7 +139,7 @@ show_ubuntu_menu() {
     echo "===================="
     read -p "Choisissez une option [1-3]: " ubuntu_choice
     case $ubuntu_choice in
-        1) sudo apt update && sudo apt upgrade ;;
+        1) sudo apt update && sudo apt upgrade -y ;;
         2) read -p "Entrez le nom du paquet à installer: " package_name; sudo apt install -y $package_name ;;
         3) show_main_menu ;;
         *) echo "Option invalide"; show_ubuntu_menu ;;
