@@ -1,5 +1,16 @@
 #!/bin/bash
 
+# Vérifier si le script est exécuté par root
+check_root() {
+    if [[ $(id -u) -ne 0 ]]; then
+        echo "Ce script doit être exécuté avec des privilèges root."
+        exit 1
+    fi
+}
+
+# Vérifier si le script est lancé avec des privilèges root
+check_root
+
 # Vérifier et installer sudo si nécessaire
 check_and_install_sudo() {
     clear
@@ -12,16 +23,8 @@ check_and_install_sudo() {
     else
         echo "sudo est déjà installé."
     fi
-
-    # Ajouter l'utilisateur au groupe sudo si ce n'est pas déjà fait
-    if ! groups $USER | grep &>/dev/null '\bsudo\b'; then
-        echo "Ajout de l'utilisateur $(whoami) au groupe sudo..."
-        sudo usermod -aG sudo $(whoami)
-        echo "L'utilisateur $(whoami) a été ajouté au groupe sudo."
-    else
-        echo "L'utilisateur $(whoami) est déjà membre du groupe sudo."
-    fi
 }
+
 # Appeler la fonction de vérification de sudo
 check_and_install_sudo
 
