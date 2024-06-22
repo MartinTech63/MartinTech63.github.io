@@ -9,6 +9,10 @@ check_and_install_sudo() {
         apt update
         apt install -y sudo
         echo "sudo a été installé."
+        # Ajouter l'utilisateur au groupe sudo
+        user=$(whoami)
+        sudo usermod -aG sudo $user
+        echo "$user a été ajouté au groupe sudo."
     else
         echo "sudo est déjà installé."
     fi
