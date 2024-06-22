@@ -9,15 +9,19 @@ check_and_install_sudo() {
         apt update
         apt install -y sudo
         echo "sudo a été installé."
-        # Ajouter l'utilisateur au groupe sudo
-        user=$(whoami)
-        sudo usermod -aG sudo $user
-        echo "$user a été ajouté au groupe sudo."
     else
         echo "sudo est déjà installé."
     fi
-}
 
+    # Ajouter l'utilisateur au groupe sudo si ce n'est pas déjà fait
+    if ! groups $USER | grep &>/dev/null '\bsudo\b'; then
+        echo "Ajout de l'utilisateur $(whoami) au groupe sudo..."
+        sudo usermod -aG sudo $(whoami)
+        echo "L'utilisateur $(whoami) a été ajouté au groupe sudo."
+    else
+        echo "L'utilisateur $(whoami) est déjà membre du groupe sudo."
+    fi
+}
 # Appeler la fonction de vérification de sudo
 check_and_install_sudo
 
