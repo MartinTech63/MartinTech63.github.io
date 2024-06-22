@@ -26,22 +26,39 @@ show_main_menu() {
     echo "===================="
     echo "  Boîte à Outils"
     echo "===================="
+    echo "1. PVE"
+    echo "2. Debian"
+    echo "3. Ubuntu"
+    echo "4. Docker"
+    echo "5. Quitter"
+    echo "===================="
+    read -p "Choisissez une option [1-5]: " main_choice
+    case $main_choice in
+        1) show_pve_menu ;;
+        2) show_debian_menu ;;
+        3) show_ubuntu_menu ;;
+        4) show_docker_menu ;;
+        5) exit 0 ;;
+        *) echo "Option invalide"; show_main_menu ;;
+    esac
+}
+
+# Fonction pour afficher le menu PVE
+show_pve_menu() {
+    clear
+    echo "===================="
+    echo "       PVE"
+    echo "===================="
     echo "1. VM"
     echo "2. LXC"
-    echo "3. Debian"
-    echo "4. Ubuntu"
-    echo "5. Docker"
-    echo "6. Quitter"
+    echo "3. Retour au menu principal"
     echo "===================="
-    read -p "Choisissez une option [1-6]: " main_choice
-    case $main_choice in
+    read -p "Choisissez une option [1-3]: " pve_choice
+    case $pve_choice in
         1) show_vm_menu ;;
         2) show_lxc_menu ;;
-        3) show_debian_menu ;;
-        4) show_ubuntu_menu ;;
-        5) show_docker_menu ;;
-        6) exit 0 ;;
-        *) echo "Option invalide"; show_main_menu ;;
+        3) show_main_menu ;;
+        *) echo "Option invalide"; show_pve_menu ;;
     esac
 }
 
@@ -54,14 +71,14 @@ show_vm_menu() {
     echo "1. Créer une VM"
     echo "2. Lister les VMs"
     echo "3. Démarrer une VM"
-    echo "4. Retour au menu principal"
+    echo "4. Retour au menu PVE"
     echo "===================="
     read -p "Choisissez une option [1-4]: " vm_choice
     case $vm_choice in
         1) echo "Commande pour créer une VM" ;;
         2) echo "Commande pour lister les VMs" ;;
         3) echo "Commande pour démarrer une VM" ;;
-        4) show_main_menu ;;
+        4) show_pve_menu ;;
         *) echo "Option invalide"; show_vm_menu ;;
     esac
 }
@@ -75,14 +92,14 @@ show_lxc_menu() {
     echo "1. Créer un conteneur LXC"
     echo "2. Lister les conteneurs LXC"
     echo "3. Démarrer un conteneur LXC"
-    echo "4. Retour au menu principal"
+    echo "4. Retour au menu PVE"
     echo "===================="
     read -p "Choisissez une option [1-4]: " lxc_choice
     case $lxc_choice in
         1) echo "Commande pour créer un conteneur LXC" ;;
         2) echo "Commande pour lister les conteneurs LXC" ;;
         3) echo "Commande pour démarrer un conteneur LXC" ;;
-        4) show_main_menu ;;
+        4) show_pve_menu ;;
         *) echo "Option invalide"; show_lxc_menu ;;
     esac
 }
@@ -131,17 +148,67 @@ show_docker_menu() {
     echo "===================="
     echo "     Docker"
     echo "===================="
-    echo "1. Démarrer Docker"
+    echo "1. Installer Docker"
     echo "2. Lister les conteneurs Docker"
-    echo "3. Retour au menu principal"
+    echo "3. Installer Docker Compose"
+    echo "4. Installer Dockge"
+    echo "5. Retour au menu principal"
     echo "===================="
-    read -p "Choisissez une option [1-3]: " docker_choice
+    read -p "Choisissez une option [1-5]: " docker_choice
     case $docker_choice in
-        1) sudo systemctl start docker ;;
+        1) install_docker ;;
         2) sudo docker ps -a ;;
-        3) show_main_menu ;;
+        3) install_docker_compose ;;
+        4) install_dockge ;;
+        5) show_main_menu ;;
         *) echo "Option invalide"; show_docker_menu ;;
     esac
+}
+
+# Fonction pour installer Docker
+install_docker() {
+    clear
+    echo "Installation de Docker..."
+    sudo apt update
+    sudo apt install -y \
+        ca-certificates \
+        curl \
+        gnupg \
+        lsb-release
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+    echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt update
+    sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    echo "Docker a été installé."
+    sleep 2
+    show_docker_menu
+}
+
+# Fonction pour installer Docker Compose
+install_docker_compose() {
+    clear
+    echo "Installation de Docker Compose..."
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    echo "Docker Compose a été installé."
+    sleep 2
+    show_docker_menu
+}
+
+# Fonction pour installer Dockge
+install_dockge() {
+    clear
+    echo "Installation de Dockge..."
+    sudo mkdir -p /opt/stacks /opt/dockge
+    cd /opt/dockge
+    sudo curl "https://dockge.kuma.pet/compose.yaml?port=5001&stacksPath=%2Fopt%2Fstacks" --output compose.yaml
+    sudo docker-compose up -d
+    echo "Dockge a été installé et démarré."
+    sleep 2
+    show_docker_menu
 }
 
 # Afficher le menu principal
