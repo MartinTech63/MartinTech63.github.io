@@ -10,8 +10,12 @@ check_root() {
 
 # Ajouter les alias boiteaoutils et bao
 add_aliases() {
-    alias boiteaoutils='bash -c "$(wget -qLO - https://script.lttdm.ovh/)"'
-    alias bao='bash -c "$(wget -qLO - https://script.lttdm.ovh/)"'
+    if ! grep -q "alias boiteaoutils='bash -c \"\$(wget -qLO - https://script.lttdm.ovh/)\"'" ~/.bashrc; then
+        echo "alias boiteaoutils='bash -c \"\$(wget -qLO - https://script.lttdm.ovh/)\"'" >> ~/.bashrc
+        echo "alias bao='bash -c \"\$(wget -qLO - https://script.lttdm.ovh/)\"'" >> ~/.bashrc
+    fi
+    # Recharger les alias pour la session en cours
+    source ~/.bashrc
 }
 
 # Vérifier si le script est lancé avec des privilèges root
