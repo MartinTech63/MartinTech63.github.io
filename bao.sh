@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# Ajouter les alias boiteaoutils et bao
-add_aliases() {
-    alias boiteaoutils='bash -c "$(wget -qLO - https://script.lttdm.ovh/)"'
-    alias bao='bash -c "$(wget -qLO - https://script.lttdm.ovh/)"'
-}
-
 # Vérifier si le script est exécuté par root
 check_root() {
     if [[ $(id -u) -ne 0 ]]; then
         echo "Ce script doit être exécuté avec des privilèges root."
         exit 1
     fi
+}
+
+# Ajouter les alias boiteaoutils et bao
+add_aliases() {
+    alias boiteaoutils='bash -c "$(wget -qLO - https://script.lttdm.ovh/)"'
+    alias bao='bash -c "$(wget -qLO - https://script.lttdm.ovh/)"'
 }
 
 # Vérifier si le script est lancé avec des privilèges root
